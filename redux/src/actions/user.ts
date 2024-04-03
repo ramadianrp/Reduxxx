@@ -1,0 +1,14 @@
+"use server"
+
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+
+export async function logout() {
+    cookies().delete('Authorization')
+    redirect('/login')
+}
+
+export async function postLogin(){
+    console.log('Login Successful');
+    
+}
