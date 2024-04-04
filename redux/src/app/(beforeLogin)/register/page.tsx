@@ -1,104 +1,96 @@
+"use client"
+
+import Link from "next/link"
+
 export default function Register() {
 
 
     return (
         <>
-            <link
-                href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-                rel="stylesheet"
-            />
-            <div
-                className="bg-no-repeat bg-cover bg-center relative"
-                style={{
-                    backgroundImage:
-                        "url(https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1951&q=80)"
-                }}
-            >
-                <div className="absolute bg-gradient-to-b from-green-500 to-green-400 opacity-75 inset-0 z-0" />
-                <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
-                    <div className="flex-col flex  self-center p-10 sm:max-w-5xl xl:max-w-2xl  z-10">
-                        <div className="self-start hidden lg:flex flex-col  text-white">
-                            <img src="" className="mb-3" />
-                            <h1 className="mb-3 font-bold text-5xl">Hi ? Welcome Back Aji </h1>
-                            <p className="pr-3">
-                                Lorem ipsum is placeholder text commonly used in the graphic, print,
-                                and publishing industries for previewing layouts and visual mockups
-                            </p>
+            <div className="bg-white flex justify-center items-center h-screen ">
+                {/* Left: Image */}
+                
+                {/* Right: Login Form */}
+                <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 bg-white">
+                    <h1 className="text-2xl font-semibold mb-4">Register your account</h1>
+                    <form action="#" method="POST">
+                        {/* Username Input */}
+                        <div className="mb-4">
+                            <label htmlFor="name" className="block text-gray-600">
+                                Name
+                            </label>
+                            <input
+                                placeholder="your name"
+                                type="text"
+                                id="name"
+                                name="name"
+                                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                                autoComplete="off"
+                            />
                         </div>
-                    </div>
-                    <div className="flex justify-center self-center  z-10">
-                        <div className="p-12 bg-white mx-auto rounded-2xl w-100 ">
-                            <div className="mb-4">
-                                <h3 className="font-semibold text-2xl text-gray-800">Sign In </h3>
-                                <p className="text-gray-500">Please sign in to your account.</p>
-                            </div>
-                            <div className="space-y-5">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-gray-700 tracking-wide">
-                                        Email
-                                    </label>
-                                    <input
-                                        className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
-                                        type=""
-                                        placeholder="mail@gmail.com"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="mb-5 text-sm font-medium text-gray-700 tracking-wide">
-                                        Password
-                                    </label>
-                                    <input
-                                        className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
-                                        type=""
-                                        placeholder="Enter your password"
-                                    />
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center">
-                                        <input
-                                            id="remember_me"
-                                            name="remember_me"
-                                            type="checkbox"
-                                            className="h-4 w-4 bg-blue-500 focus:ring-blue-400 border-gray-300 rounded"
-                                        />
-                                        <label
-                                            htmlFor="remember_me"
-                                            className="ml-2 block text-sm text-gray-800"
-                                        >
-                                            Remember me
-                                        </label>
-                                    </div>
-                                    <div className="text-sm">
-                                        <a href="#" className="text-green-400 hover:text-green-500">
-                                            Forgot your password?
-                                        </a>
-                                    </div>
-                                </div>
-                                <div>
-                                    <button
-                                        type="submit"
-                                        className="w-full flex justify-center bg-green-400  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
-                                    >
-                                        Sign in
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="pt-5 text-center text-gray-400 text-xs">
-                                <span>
-                                    Copyright © 2021-2022
-                                    <a
-                                        href="https://codepen.io/uidesignhub"
-                                        rel=""
-                                        target="_blank"
-                                        title="Ajimon"
-                                        className="text-green hover:text-green-500 "
-                                    >
-                                        AJI
-                                    </a>
-                                </span>
-                            </div>
+                        <div className="mb-4">
+                            <label htmlFor="username" className="block text-gray-600">
+                                Username
+                            </label>
+                            <input
+                                placeholder="your username"
+                                type="text"
+                                id="username"
+                                name="username"
+                                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                                autoComplete="off"
+                            />
                         </div>
+                        <div className="mb-4">
+                            <label htmlFor="email" className="block text-gray-600">
+                                Email
+                            </label>
+                            <input
+                                placeholder="your email"
+                                type="text"
+                                id="email"
+                                name="email"
+                                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                                autoComplete="off"
+                            />
+                        </div>
+                        {/* Password Input */}
+                        <div className="mb-4">
+                            <label htmlFor="password" className="block text-gray-600">
+                                Password
+                            </label>
+                            <input
+                                placeholder="your password"
+                                type="password"
+                                id="password"
+                                name="password"
+                                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                                autoComplete="off"
+                            />
+                        </div>
+                        {/* Login Button */}
+                        <button
+                            type="submit"
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
+                        >
+                            Register
+                        </button>
+                    </form>
+                    <div className="flex justify-center items-center mt-8">
+                        <p>Already have an account?</p>
                     </div>
+                    <div className="flex mt-1 justify-center items-center">
+                        <Link href="/login" style={{ color: '#0070f3' }}>
+                            Login here!
+                        </Link>
+                    </div>
+                </div>
+                <div className="w-full h-screen hidden lg:block">
+                    <img
+                        src="https://images.unsplash.com/photo-1555992938-ae7aa7e36d07?q=80&w=3046&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Placeholder Image"
+                        className="object-cover w-full h-full"
+                    />
                 </div>
             </div>
         </>

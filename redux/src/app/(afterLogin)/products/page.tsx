@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 
 export default function Products() {
@@ -7,29 +8,18 @@ export default function Products() {
     return (
         <>
             <NavBar />
-            <div className="carousel carousel-end rounded-box">
-                <div className="carousel-item">
-                    <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Drink" />
-                </div>
-                <div className="carousel-item">
-                    <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg" alt="Drink" />
-                </div>
-                <div className="carousel-item">
-                    <img src="https://daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg" alt="Drink" />
-                </div>
-                <div className="carousel-item">
-                    <img src="https://daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg" alt="Drink" />
-                </div>
-                <div className="carousel-item">
-                    <img src="https://daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" alt="Drink" />
-                </div>
-                <div className="carousel-item">
-                    <img src="https://daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg" alt="Drink" />
-                </div>
-                <div className="carousel-item">
-                    <img src="https://daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" alt="Drink" />
+            <div className="carousel w-full relative">
+                <div id="item1" className="carousel-item w-full relative">
+                    <img src="https://www.durex.co.id/static/a1e5e4d2fe56a4a861d1799cabd4393c/e0075/page-lubes-main-title-bg.webp" className="w-full" />
+                    <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mb-5 text-5xl font-bold text-white">CONDOMS | LUBES 
+                | TOYS</h1>
                 </div>
             </div>
+
+
+
+
+            <Footer />
         </>
     )
 }
