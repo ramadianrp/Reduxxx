@@ -2,6 +2,7 @@ import NavBar from "@/components/NavBar";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import SeeMore from "@/components/SeeMore";
 
 export default function Home() {
   return (
@@ -49,7 +50,7 @@ export default function Home() {
         </div>
         <br />
         <div className="hero mt-5 mb-5" style={{ background: 'white' }}>
-          <div className="hero- content text-center text-neutral-content" style={{ color: 'black' }}>
+          <div className="hero content text-center text-neutral-content" style={{ color: 'black' }}>
             <div className="max-w-md">
               <h1 className="mb-5 text-7xl font-bold">YOUR FAVOURITES</h1>
             </div>
@@ -70,6 +71,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <SeeMore />
 
 
 

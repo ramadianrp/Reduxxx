@@ -6,8 +6,7 @@ type ProductType = {
     name: string;
     price: number;
     description: string;
-    image: string;
-    size: number;
+    imgUrl: string;
 }
 
 

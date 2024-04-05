@@ -5,7 +5,7 @@ export default function Footer() {
 
     return (
         <>
-            <div className="flex flex-col mx-3 bg-white rounded-lg">
+            <div className="flex flex-col bg-white">
                 <div className="w-full draggable">
                     <div className="container flex flex-col mx-auto">
                         <div className="flex flex-col items-center w-full my-20">
@@ -14,7 +14,7 @@ export default function Footer() {
                             </span>
                             <div className="flex items-center">
                                 <p className="text-base font-normal leading-7 text-center text-grey-700">
-                                    2024 Redux and Durex company. All rights reserved.
+                                    2024 Redux and Durex company. Ini semua bercanda.
                                 </p>
                             </div>
                         </div>
