@@ -5,11 +5,16 @@ import { NextResponse } from "next/server"
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const result = await UserModel.createUser(body);
+        const result = await UserModel.create(body);
 
-        return NextResponse.json({
-            data: result
-        })
+        return Response.json(
+            {
+                data: result
+            },
+            {
+                status: 201
+            },
+        )
     } catch (error) {
         if (error instanceof ZodError) {
             const errMessage = error.errors[0].path[0] + " " + error.errors[0].message;
@@ -19,6 +24,17 @@ export async function POST(request: Request) {
                 status: 400
             });
         };
+
+        if (error instanceof Error) {
+            if (error.message === "Email/Username Already Registered"){
+                return NextResponse.json(
+                    {
+                        message: error.message
+                    },
+                    {status: 400}
+                )
+            }
+        }
 
         return NextResponse.json(
             {

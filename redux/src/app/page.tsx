@@ -1,16 +1,33 @@
+"use client"
 import NavBar from "@/components/NavBar";
-import Image from "next/image";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import SeeMore from "@/components/SeeMore";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { deleteCookie, getCookie } from "cookies-next";
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const accessToken = getCookie('Authorization');
+    setIsLoggedIn(accessToken ? true : false);
+  }, []);
+
+  const handleLogout = () => {
+    deleteCookie('Authorization');
+    setIsLoggedIn(false);
+    router.push('/login');
+  };
+
   return (
     <>
       <NavBar />
       <div className="main" style={{ background: 'white' }}>
         <div className="w-full flex justify-center" style={{ background: 'white' }}>
-          <div className="carousel w-full relative">
+          <div className="carousel w-3/4 relative">
             <div id="item1" className="carousel-item w-full relative">
               <img src="https://images.unsplash.com/photo-1544963823-9810de5a798a?q=80&w=3333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="w-1/2" alt="Image 1" />
               <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
@@ -41,7 +58,13 @@ export default function Home() {
               <h1 className="mb-5 text-7xl font-bold">REAL GOOD EXPERIENCE FOR ALL</h1>
               <p className="mb-5">Gone are the days of one person, one position & definitely one perspective. Durex believes good intimacy for is for anyone & everyone. However you like, with whoever you like. It’s time we challenge the norms & stamp out stigmas. Feel good about whatever you’re into - it’s your experience so do it your way.</p>
               <br />
-              <Link href="/login" className="btn btn-ghost">Get Started</Link>
+              {isLoggedIn ? (
+                <button onClick={handleLogout} className="btn btn-ghost">
+                  Logout
+                </button>
+              ) : (
+                <Link href="/login" className="btn btn-ghost">Get Started</Link>
+              )}
             </div>
           </div>
         </div>

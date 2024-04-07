@@ -1,34 +1,27 @@
 import { ObjectId } from 'mongodb';
 
-export type products = Product[];
 
-export type UserModel = {
+export interface User {
     _id: ObjectId;
-    username: string;
     email: string;
     password: string;
-    superadmin?: boolean;
-    original_name?: string;
-}
-
-export type UserModelCreate = {
     username: string;
-    email: string;
-    password: string;
-    superadmin?: boolean; original_name?: string;
-}
+    name: string;
+};
 
 export interface Product {
-    id: string;
-    title: string;
-    price: number;
+    _id: ObjectId;
+    name: string;
+    slug: string;
     description: string;
-    category: string;
-    image: string;
-    rating: Rating;
+    price: number;
+    tags: string[];
+    thumbnail: string;
+    images: string[];
 }
 
-export interface Rating {
-    rate: number;
-    count: number;
-}
+export interface Wishlist {
+    _id: ObjectId;
+    productId: string;
+    userId: string;
+};

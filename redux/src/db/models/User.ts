@@ -1,31 +1,71 @@
 import { ObjectId } from 'mongodb';
 import { database } from '../config/mongodb';
+import { z } from 'zod';
+import { User } from '@/types';
+import brcyptjs from 'bcryptjs';
 
-type UserType = {
-    _id: ObjectId;
+
+interface newUser {
+    name: string;
+    username: string;
     email: string;
     password: string;
-    username: string;
-    name: string;
-};
+}
 
-type InputUser = Omit<UserType, "_id">;
+// type InputUser = Omit<User, "_id">;
 
+const UserValidation = z.object({
+    username: z.string({
+        required_error: "Username can't be empty"
+    }),
+    email: z.string({
+        required_error: "Email can't be empty"
+    }).email(),
+    password: z.string({
+        required_error: "Password can't be empty"
+    })
+})
 
-class UserModel{
-    static userCollection(){
-        return database.collection("Users");
+class UserModel {
+    static userCollection() {
+        return database.collection("User");
     };
 
-    static async createUser(body: InputUser){
-        const newUser =  await this.userCollection().insertOne({
+    static async create(newUser: newUser) {
+        const validation = UserValidation.safeParse(newUser);
+        if (!validation.success) {
+            const errors = validation.error
+            throw errors
+        }
 
-        });
-        return newUser;
+        const user = {
+            ...newUser,
+            password: brcyptjs.hashSync(newUser.password)
+        }
+
+        const [validateUser] = await this.userCollection().find({
+            $or: [
+                {
+                    username: user.username
+                },
+                {
+                    email: user.email
+                }
+            ]
+        }).toArray()
+        if (validateUser) {
+            throw new Error("already registered")
+        }
+        const data = await this.userCollection().insertOne(user)
+        return data
+    }
+
+    static async getUserByEmail(email: string) {
+        return await this.userCollection().findOne({ email: email }) as User;
     };
 
-    static async getUserByEmail(email: string){
-        return (await this.userCollection().findOne({ email: email})) as UserType;
+    static async getUserByUsername(username: string) {
+        return await this.userCollection().findOne({ username }) as User;
     };
 }
 

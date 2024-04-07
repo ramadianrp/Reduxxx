@@ -1,7 +1,25 @@
 "use client";
+import { deleteCookie, getCookie } from "cookies-next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const router = useRouter();
+  
+    useEffect(() => {
+      const accessToken = getCookie('Authorization');
+      setIsLoggedIn(accessToken ? true : false);
+    }, []);
+  
+    const handleLogout = () => {
+      deleteCookie('Authorization');
+      setIsLoggedIn(false);
+      router.push('/login');
+    };
+
+
     return (
         <nav className="bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-50">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -38,14 +56,27 @@ export default function NavBar() {
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
                             <Link href="/">
-                                    Home
+                                Home
                             </Link>
                         </li>
                         <li>
                             <Link href="/products">
-                                    Products
+                                Products
                             </Link>
                         </li>
+                        {isLoggedIn ? (
+                            <>
+                                <li>
+                                    <Link href={"/wishlists"}>
+                                        Your Wishlist
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <Link href={"/login"} />
+                            </>
+                        )}
                     </ul>
                 </div>
             </div>

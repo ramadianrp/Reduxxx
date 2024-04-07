@@ -1,30 +1,29 @@
-import { Product } from "@/types";
-import AddToWishlistButton from "./AddToWishlistButton";
+import { Wishlist } from "@/types";
 
-interface ProductsCardProps {
-    products: Product[];
+
+interface WishlistCardProps {
+    wishlists: Wishlist[];
 }
 
-const ProductsCard = ({ products }: ProductsCardProps) => {
+const ProductsCard = ({ wishlists }: WishlistCardProps) => {
     return (
         <div className="main border border-white bg-white">
             <div className="grid justify-center grid-cols-3 gap-4 mx-40 mb-5 bg-white">
-                {products.map((product, index) => (
+                {wishlists.map((wishlist, index) => (
                     <div key={index} className="card bg-white">
                         <figure className="pt-10">
                             <img
-                                src={product.thumbnail}
-                                alt={product.name}
+                                src={wishlist.thumbnail}
+                                alt={wishlist.name}
                                 className="rounded-xl w-1/2 transition-transform transform hover:scale-110"
                             />
                         </figure>
                         <div className="card-body items-center text-center">
-                            <p className="text-black text-md">{product.name}</p>
+                            <p className="text-black text-md">{wishlist.name}</p>
                             <p className="text-lg text-blue-500">
-                                {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(product.price)}
+                                {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(wishlist.price)}
                             </p>
                         </div>
-                        <AddToWishlistButton productId={product._id} />
                     </div>
                 ))}
             </div>
