@@ -9,7 +9,7 @@ export const createToken = (payload: JwtPayload) =>
 export const readPayload = (token: string) =>
     jwt.verify(token, SECRET_KEY);
 
-export const readPayloadJose = async <T>(token:  string) => {
+export const readPayloadJose = async <T>(token: string) => {
 
     const secret = new TextEncoder().encode(SECRET_KEY);
     const result = await jose.jwtVerify<T>(token, secret);

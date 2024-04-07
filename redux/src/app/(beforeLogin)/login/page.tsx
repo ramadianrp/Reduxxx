@@ -1,36 +1,41 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import ClientFlashComponent from "@/components/ClientFlashComponent";
 
 export default function Login() {
     async function loginAction(formData: FormData) {
         "use server"
-        try {
-            cookies().delete("Authorization");
-            const rawFormData = {
-                email: formData.get("email"),
-                password: formData.get("password"),
-            };
 
-            const response = await fetch("http://localhost:3000/api/users/login", {
-                method: "POST",
-                cache: "no-store",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(rawFormData),
-            });
+        cookies().delete("Authorization");
+        const rawFormData = {
+            email: formData.get("email"),
+            password: formData.get("password"),
+        };
 
-            if (response.status != 200) {
-                throw new Error("Failed to Login" + response.status);
+        const response = await fetch("http://localhost:3000/api/users/login", {
+            method: "POST",
+            cache: "no-store",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(rawFormData),
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.json();
+            // console.log(errorMessage, "<<<< err mess");
+            if(errorMessage.error) {
+                redirect(`/login?error=${errorMessage.error}`);
+            }else{
+                redirect(`/login?error=${errorMessage.message}`);
             }
+
+        } else {
             const responseJson = await response.json();
             cookies().set("Authorization", `Bearer ${responseJson.data.accessToken}`);
-        } catch (error) {
-            console.error("Login Error", error);
-            redirect("/login");
+            redirect("/");
         }
-        return redirect("/");
     }
 
     return (
@@ -47,6 +52,7 @@ export default function Login() {
                 {/* Right: Login Form */}
                 <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 bg-white">
                     <h1 className="text-2xl font-semibold mb-4">Login to your account</h1>
+                    <ClientFlashComponent />
                     <form action={loginAction}>
                         {/* Username Input */}
                         <div className="mb-4">
@@ -79,7 +85,6 @@ export default function Login() {
                         {/* Login Button */}
                         <button
                             type="submit"
-                            
                             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
                         >
                             Login

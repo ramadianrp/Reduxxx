@@ -5,8 +5,10 @@ import { readPayloadJose } from "./db/helpers/jwt";
 
 
 export async function middleware(request: NextRequest) {
-    if (request.nextUrl.pathname.startsWith("/api/wishlist")) {
+    if (request.nextUrl.pathname.startsWith("/api/wishlists")) {
         const auth = cookies().get("Authorization")?.value;
+        // console.log(auth, '<<<<< auuutthh');
+        
 
         if (!auth) {
             return NextResponse.json(
@@ -19,7 +21,7 @@ export async function middleware(request: NextRequest) {
             );
         }
 
-        const [type, token] = auth?.split(" ");
+        const [type, accessToken] = auth?.split(" ");
         if (type !== "Bearer") {
             return NextResponse.json(
                 {
@@ -31,17 +33,24 @@ export async function middleware(request: NextRequest) {
             );
         }
 
-        const decoded = await readPayloadJose<{ _id: string, email: string }>(token);
+        const decoded = await readPayloadJose<{ _id: string, email: string }>(accessToken);
+        // console.log(decoded, "<<< decoded");
+        
 
         const requestHeaders = new Headers(request.headers);
         requestHeaders.set("x-user-id", decoded._id);
         requestHeaders.set("x-user-email", decoded.email);
+
+        // console.log(requestHeaders, "<<<< reqhead");
+        
 
         const response = NextResponse.next({
             request: {
                 headers: requestHeaders
             }
         });
+        // console.log(response, "<<< response");
+        
         return response;
     }
 
@@ -55,5 +64,5 @@ export async function middleware(request: NextRequest) {
 };
 
 export const config ={
-    matcher: ["/api/wishlist/:path*", "/wishlists/:path*"],
+    matcher: ["/api/wishlists/:path*", "/wishlists/:path*", "/api/products/:path*", "/products/:path*"],
 }

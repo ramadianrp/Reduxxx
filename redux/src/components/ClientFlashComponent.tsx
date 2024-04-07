@@ -6,6 +6,9 @@ const ClientFlashComponent = () => {
 
     const searchParams = useSearchParams()
     const errorMessage = searchParams.get("error")
+    
+    console.log(errorMessage);
+    
 
     return(
         <>
@@ -18,4 +21,4 @@ const ClientFlashComponent = () => {
     )
 }
 
-export default ClientFlashComponent
+export default ClientFlashComponent 

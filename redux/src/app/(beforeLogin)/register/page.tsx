@@ -1,6 +1,13 @@
+import ClientFlashComponent from "@/components/ClientFlashComponent";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+
+export const metadata = {
+    title: "Register to Reduxxx",
+    description: "join our world",
+  }
+  
 
 export default function Register() {
     async function registerAction(formData: FormData) {
@@ -12,7 +19,7 @@ export default function Register() {
             email: formData.get("email"),
             password: formData.get("password"),
         };
-        console.log(rawFormData);
+        // console.log(rawFormData);
         
 
         const response = await fetch(`http://localhost:3000/api/users/register`, {
@@ -23,7 +30,16 @@ export default function Register() {
             },
             body: JSON.stringify(rawFormData),
         });
-        redirect("/login");
+        
+        if (!response.ok) {
+            const errorMessage = await response.json();
+            console.log(errorMessage, "<<< errormessage");
+            
+            redirect(`/register?error=${errorMessage.error}`);
+        } else {
+            redirect("/login");
+        }
+        
     }
 
     return (
@@ -40,6 +56,7 @@ export default function Register() {
                 {/* Right: Login Form */}
                 <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 bg-white">
                     <h1 className="text-2xl font-semibold mb-4">Register your account</h1>
+                    <ClientFlashComponent />
                     <form action={registerAction}>
                         {/* Username Input */}
                         <div className="mb-4">

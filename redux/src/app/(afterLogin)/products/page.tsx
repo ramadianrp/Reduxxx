@@ -1,5 +1,5 @@
 "use client"
-import AddToWishlistButton from "@/components/AddToWishlistButton";
+
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import ProductsCard from "@/components/ProductCard";
@@ -33,26 +33,26 @@ export default function Products() {
         }
     };
 
-    
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
-    
+
     const filteredProducts: Product[] = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        
-        if (loading) {
-            return (
-                <div className="flex justify-center items-center h-screen bg-white">
+    );
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen bg-white">
                 <span className="loading loading-bars loading-lg"></span>
             </div>
         );
     }
-    
-    useEffect(() => {
-        fetchData();
-    }, []);
+
     return (
         <>
             <NavBar />
@@ -66,7 +66,7 @@ export default function Products() {
                 <div className="hero mt-5 mb-5">
                     <div className="text-center text-neutral-content" style={{ color: 'black' }}>
                         <div className="max-w-md mx-auto">
-                            <h1 className="mb-5 text-xl font-bold text-blue-500">Durex memiliki produk pelumas berbahan dasar air yang bisa meningkatkan kenikmatan bercinta bersama pasangan.</h1>
+                            <h1 className="mbx-5 text-xl font-bold text-blue-500">Durex memiliki produk pelumas berbahan dasar air yang bisa meningkatkan kenikmatan bercinta bersama pasangan.</h1>
                             <input
                                 type="text"
                                 placeholder="Search products..."

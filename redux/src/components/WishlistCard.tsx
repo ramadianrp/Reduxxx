@@ -1,34 +1,27 @@
-import { Wishlist } from "@/types";
+'use-client'
+import React from "react";
+import { Product } from "@/types";
+import DeleteWishlist from "./DeleteWishlist";
 
-
-interface WishlistCardProps {
-    wishlists: Wishlist[];
-}
-
-const ProductsCard = ({ wishlists }: WishlistCardProps) => {
-    return (
-        <div className="main border border-white bg-white">
-            <div className="grid justify-center grid-cols-3 gap-4 mx-40 mb-5 bg-white">
-                {wishlists.map((wishlist, index) => (
-                    <div key={index} className="card bg-white">
-                        <figure className="pt-10">
-                            <img
-                                src={wishlist.thumbnail}
-                                alt={wishlist.name}
-                                className="rounded-xl w-1/2 transition-transform transform hover:scale-110"
-                            />
-                        </figure>
-                        <div className="card-body items-center text-center">
-                            <p className="text-black text-md">{wishlist.name}</p>
-                            <p className="text-lg text-blue-500">
-                                {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(wishlist.price)}
-                            </p>
-                        </div>
-                    </div>
-                ))}
-            </div>
+const CardWishlist = ({ product, _id }: {product: Product, _id: string, onRemove: (id: string) => void}) => {
+  return (
+    <div className="bg-white border-b border-gray-200 pl-12">
+      <div className="flex items-center py-4">
+        <img
+          className="h-24 w-24 object-cover mr-4"
+          src={product.thumbnail}
+          alt={product.name}
+        />
+        <div>
+          <div className="font-bold text-lg mb-1">{product.name}</div>
+          <p className="text-gray-700 text-sm mb-2">{product.description}</p>
+          <div className="flex flex-wrap">
+             <DeleteWishlist wishlistId={_id}  />
+          </div>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
-export default ProductsCard;
+export default CardWishlist

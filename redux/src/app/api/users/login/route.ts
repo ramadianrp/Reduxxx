@@ -23,16 +23,16 @@ export async function POST(request: Request) {
         const dataLogin = await UserModel.getUserByEmail(email)
         if(!dataLogin) {
             return NextResponse.json({
-                message: "User Not Found"
+                message: "Invalid Email/Password"
             },{
                 status: 401
             })
         }
 
         const validatePassword = compareTextWithHash(password, dataLogin.password) 
-        if(!compareTextWithHash) {
+        if(!validatePassword) {
             return NextResponse.json({
-                message: "Invalid Password"
+                message: "Invalid Email/Password"
             },{
                 status: 401
             })

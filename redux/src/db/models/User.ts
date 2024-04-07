@@ -23,7 +23,7 @@ const UserValidation = z.object({
     }).email(),
     password: z.string({
         required_error: "Password can't be empty"
-    })
+    }).min(5)
 })
 
 class UserModel {
