@@ -2,6 +2,13 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import ClientFlashComponent from "@/components/ClientFlashComponent";
+// export const dynamic = "force-dynamic"
+
+
+export const metadata = {
+    title: "Login to Reduxxx",
+    description: "join our world",
+}
 
 export default function Login() {
     async function loginAction(formData: FormData) {
@@ -92,7 +99,7 @@ export default function Login() {
                     </form>
                     {/* Sign up Link */}
                     <div className="flex justify-center items-center mt-8">
-                        <p>Don't have an account?</p>
+                        <p>Dont have an account?</p>
                     </div>
                     <div className="mt-1 text-blue-500 text-center">
                         <Link href="/register" className="hover:underline">

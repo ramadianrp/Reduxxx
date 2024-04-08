@@ -52,7 +52,7 @@ export default async function ProductDetail({
                                     <img
                                         src={product?.data.images[0]}
                                         alt="Product Thumbnail"
-                                        className="rounded-lg shadow-lg bg-white"
+                                        className="rounded-lg bg-white"
                                     />
                                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                                         <Link
@@ -73,9 +73,9 @@ export default async function ProductDetail({
                                     <img
                                         src={product?.data.images[1]}
                                         alt="Product Thumbnail"
-                                        className="rounded-lg shadow-lg"
+                                        className="rounded-lg bg-white"
                                     />
-                                    <div className="absolute bg-white flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                                         <Link
                                             href="#slide1"
                                             className="btn btn-circle">
@@ -92,7 +92,7 @@ export default async function ProductDetail({
                         </div>
                     </div>
                 </div>
-                <div className="flex-1 w-full mx-12 mt-24 bg-white">
+                <div className="flex-1 w-full mx-12 mt-24">
                     <h1 className="text-3xl font-bold my-4">{product?.data.name}</h1>
                     <h2 className="text-xl font-semibold">About this product</h2>
                     <p className="mt-2">{product?.data.description}</p>

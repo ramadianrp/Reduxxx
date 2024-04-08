@@ -1,5 +1,7 @@
 import ProductModel from "@/db/models/Product";
 import { NextResponse } from "next/server";
+// export const dynamic = "force-dynamic"
+
 
 export const GET = async (request: Request) => {
   try {

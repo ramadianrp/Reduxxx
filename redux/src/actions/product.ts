@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 export async function addProduct(product: Product) {
-    const res = await fetch("", {
+    const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -20,7 +20,7 @@ export async function addProduct(product: Product) {
 }
 
 export async function deleteProduct(id: string | undefined) {
-    const res = await fetch ("", {
+    const res = await fetch ("http://localhost:3000/api/products/" + id, {
         method: "DELETE"
     });
 

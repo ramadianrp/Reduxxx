@@ -5,6 +5,9 @@ import NavBar from "@/components/NavBar";
 import ProductsCard from "@/components/ProductCard";
 import { Product } from "@/types";
 import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+
 
 interface ProductsProps {
     products: Product[];
@@ -14,6 +17,7 @@ export default function Products() {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState<Product[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
+    const [max, setMax] = useState(1);
 
     const fetchData = async () => {
         setLoading(true);
@@ -26,6 +30,7 @@ export default function Products() {
 
             const responseJson = await response.json();
             setProducts(responseJson.data);
+            setMax(max + 1);
         } catch (error) {
             console.log(error, "<< ERR DI PRODUCTS");
         } finally {
@@ -77,7 +82,14 @@ export default function Products() {
                         </div>
                     </div>
                 </div>
-                <ProductsCard products={filteredProducts} />
+                {/* <InfiniteScroll
+                    dataLength={products.length}
+                    next={fetchData}
+                    hasMore={true}
+                    loader=""
+                    endMessage=""> */}
+                    <ProductsCard products={filteredProducts} />
+                {/* </InfiniteScroll> */}
             </div>
             <Footer />
         </>

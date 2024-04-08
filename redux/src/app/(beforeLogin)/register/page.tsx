@@ -2,12 +2,14 @@ import ClientFlashComponent from "@/components/ClientFlashComponent";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+// export const dynamic = "force-dynamic"
+
 
 export const metadata = {
     title: "Register to Reduxxx",
     description: "join our world",
-  }
-  
+}
+
 
 export default function Register() {
     async function registerAction(formData: FormData) {
@@ -20,7 +22,7 @@ export default function Register() {
             password: formData.get("password"),
         };
         // console.log(rawFormData);
-        
+
 
         const response = await fetch(`http://localhost:3000/api/users/register`, {
             method: "post",
@@ -30,16 +32,16 @@ export default function Register() {
             },
             body: JSON.stringify(rawFormData),
         });
-        
+
         if (!response.ok) {
             const errorMessage = await response.json();
             console.log(errorMessage, "<<< errormessage");
-            
+
             redirect(`/register?error=${errorMessage.error}`);
         } else {
             redirect("/login");
         }
-        
+
     }
 
     return (

@@ -2,6 +2,7 @@
 import React from "react";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 interface RemoveProps {
     wishlistId: string;
@@ -26,7 +27,14 @@ const DeleteWishlist: React.FC<RemoveProps> = ({ wishlistId }) => {
             if (!response.ok) {
                 throw new Error("Failed to remove item from wishlist");
             }
-            router.push("/wishlists");
+            if(response.ok){
+                await Swal.fire({
+                icon: 'success',
+                title: 'Removed',
+                text: 'Item removed from wishlist'
+              })
+            }
+            router.push("/products");
         } catch (error) {
             console.error("Error removing item from wishlist", error);
         }
