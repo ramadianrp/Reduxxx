@@ -2,6 +2,8 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import ClientFlashComponent from "@/components/ClientFlashComponent";
+import { Suspense } from "react";
+import Loading from "@/app/(afterLogin)/products/loading";
 // export const dynamic = "force-dynamic"
 
 
@@ -32,9 +34,9 @@ export default function Login() {
         if (!response.ok) {
             const errorMessage = await response.json();
             // console.log(errorMessage, "<<<< err mess");
-            if(errorMessage.error) {
+            if (errorMessage.error) {
                 redirect(`/login?error=${errorMessage.error}`);
-            }else{
+            } else {
                 redirect(`/login?error=${errorMessage.message}`);
             }
 
@@ -59,7 +61,9 @@ export default function Login() {
                 {/* Right: Login Form */}
                 <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 bg-white">
                     <h1 className="text-2xl font-semibold mb-4">Login to your account</h1>
-                    <ClientFlashComponent />
+                    <Suspense fallback={<Loading />}>
+                        <ClientFlashComponent />
+                    </Suspense>
                     <form action={loginAction}>
                         {/* Username Input */}
                         <div className="mb-4">

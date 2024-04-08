@@ -1,7 +1,8 @@
+import Loading from "@/app/(afterLogin)/products/loading";
 import ClientFlashComponent from "@/components/ClientFlashComponent";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 // export const dynamic = "force-dynamic"
 
 
@@ -58,7 +59,9 @@ export default function Register() {
                 {/* Right: Login Form */}
                 <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 bg-white">
                     <h1 className="text-2xl font-semibold mb-4">Register your account</h1>
-                    <ClientFlashComponent />
+                    <Suspense fallback={<Loading />}>
+                        <ClientFlashComponent />
+                    </Suspense>
                     <form action={registerAction}>
                         {/* Username Input */}
                         <div className="mb-4">
